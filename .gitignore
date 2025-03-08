@@ -2,4 +2,8 @@ output
 data
 ff.txt
 non_float_metrics.txt
-llm_hyperparameters_scraping.ipynb
+pages_text
+output_json
+output_json_papers
+papers
+queries
