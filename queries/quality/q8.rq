@@ -1,0 +1,6 @@
+SELECT ?s ?p ?o (COUNT(*) AS ?dupCount)
+WHERE {
+  ?s ?p ?o .
+}
+GROUP BY ?s ?p ?o
+HAVING (COUNT(*) > 1)

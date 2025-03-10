@@ -1,0 +1,23 @@
+SELECT ?class (COUNT(?instance) AS ?count)
+WHERE {
+  {
+    ?instance a kg:Model .
+    BIND("Model" AS ?class)
+  }
+  UNION
+  {
+    ?instance a kg:HyperParameter .
+    BIND("HyperParameter" AS ?class)
+  }
+  UNION
+  {
+    ?instance a kg:EvaluationMetric .
+    BIND("EvaluationMetric" AS ?class)
+  }
+  UNION
+  {
+    ?instance a kg:Paper .
+    BIND("Paper" AS ?class)
+  }
+}
+GROUP BY ?class

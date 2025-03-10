@@ -1,0 +1,10 @@
+SELECT ?dataset (GROUP_CONCAT(?name; separator=", ") AS ?models)
+WHERE {
+  ?model a kg:Model ;
+         kg:task "image-classification" ;
+         kg:name ?name ;
+         kg:hasEvaluationMetric ?metric .
+  ?metric kg:datasetName ?dataset .
+}
+GROUP BY ?dataset
+ORDER BY ?dataset

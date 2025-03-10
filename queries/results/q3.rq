@@ -1,0 +1,7 @@
+SELECT DISTINCT ?task
+WHERE {
+  ?model a kg:Model ;
+         kg:base_model ?baseModel ;
+         kg:task ?task .
+  FILTER(LCASE(STR(?baseModel)) = "xlm-roberta-large")
+}

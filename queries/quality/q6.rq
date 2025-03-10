@@ -1,0 +1,4 @@
+SELECT ?name (COUNT(DISTINCT ?model) AS ?duplicateCount)
+WHERE { ?model a kg:Model ; kg:name ?name .}
+GROUP BY ?name
+HAVING (COUNT(DISTINCT ?model) > 1)

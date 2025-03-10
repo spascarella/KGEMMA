@@ -1,0 +1,7 @@
+SELECT ?s ?p ?o ?expectedDomain
+WHERE {
+  ?s ?p ?o .
+  ?p rdfs:domain ?expectedDomain .
+  FILTER NOT EXISTS { ?s a ?expectedDomain }
+  FILTER(isIRI(?s))
+}

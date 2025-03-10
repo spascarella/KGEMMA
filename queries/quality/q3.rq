@@ -1,0 +1,7 @@
+SELECT ?class (COUNT(?instance) AS ?count)
+WHERE {
+  ?instance a kg:Model .
+  BIND("Model" AS ?class) .
+  FILTER NOT EXISTS { ?instance kg:hasHyperParameter ?hp }
+}
+GROUP BY ?class

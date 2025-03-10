@@ -1,0 +1,10 @@
+SELECT ?task ?metricType (COUNT(?metric) AS ?metricCount)
+WHERE {
+  ?model a kg:Model ;
+         kg:task ?task ;
+         kg:hasEvaluationMetric ?metric .
+  ?metric kg:metricType ?metricType .
+  FILTER(LCASE(STR(?task)) = "text-classification")  
+}
+GROUP BY ?task ?metricType
+ORDER BY DESC(?metricCount)

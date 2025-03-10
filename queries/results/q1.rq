@@ -1,0 +1,24 @@
+SELECT ?name ?task ?downloads
+WHERE {
+  ?model a kg:Model ;
+         kg:name ?name ;
+         kg:task ?task ;
+         kg:downloads ?downloads .
+  {
+    SELECT ?model ?task ?downloads (COUNT(?otherModel) AS ?rank)
+    WHERE {
+      ?model a kg:Model ;
+             kg:task ?task ;
+             kg:downloads ?downloads .
+      OPTIONAL {
+         ?otherModel a kg:Model ;
+                     kg:task ?task ;
+                     kg:downloads ?otherDownloads .
+         FILTER(xsd:integer(?otherDownloads) > xsd:integer(?downloads))
+      }
+    }
+    GROUP BY ?model ?task ?downloads
+  }
+  FILTER(?rank < 5)
+}
+ORDER BY ?task DESC(xsd:integer(?downloads))

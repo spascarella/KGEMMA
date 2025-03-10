@@ -1,0 +1,9 @@
+SELECT ?name (COUNT(DISTINCT ?lang) AS ?languageCount)
+WHERE {
+  ?model a kg:Model ;
+         kg:task "text-classification" ;
+         kg:language ?lang ;
+         kg:name ?name .
+}
+GROUP BY ?model ?name
+HAVING (COUNT(DISTINCT ?lang) > 1)

@@ -1,0 +1,8 @@
+SELECT ?dataset (COUNT(?metric) AS ?metricCount)
+WHERE {
+  ?metric kg:datasetName ?dataset ;
+         kg:taskType "text-classification" .
+}
+GROUP BY ?dataset
+ORDER BY DESC(?metricCount)
+LIMIT 10

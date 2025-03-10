@@ -1,0 +1,11 @@
+SELECT ?paperTitle ?paperAbstract (GROUP_CONCAT(?modelName; separator=", ") AS ?models)
+WHERE {
+  ?model a kg:Model ;
+         kg:name ?modelName ;
+         kg:hasPaper ?paper .
+  OPTIONAL { ?paper bibo:title ?paperTitle . }
+  OPTIONAL { ?paper bibo:abstract ?paperAbstract . }
+}
+GROUP BY ?paper ?paperTitle ?paperAbstract
+HAVING (COUNT(?model) > 1)
+ORDER BY ?paper

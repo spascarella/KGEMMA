@@ -1,0 +1,71 @@
+SELECT ?name ?dataset ?metricValue ?metricType
+WHERE {
+  {
+    SELECT ?model ?name ?dataset ?metricValue ?metricType
+    WHERE {
+      ?model a kg:Model ;
+             kg:task "text-classification" ;
+             kg:name ?name ;
+             kg:hasEvaluationMetric ?metric .
+      ?metric kg:datasetName ?dataset ;
+              kg:metricType ?metricType ;
+              kg:metricValue ?metricValue .
+      FILTER(lcase(str(?dataset)) = "glue")
+      FILTER(regex(lcase(str(?metricType)), "^(accuracy|acc)$"))
+    }
+    ORDER BY DESC(xsd:float(?metricValue))
+    LIMIT 1
+  }
+  UNION
+  {
+    SELECT ?model ?name ?dataset ?metricValue ?metricType
+    WHERE {
+      ?model a kg:Model ;
+             kg:task "text-classification" ;
+             kg:name ?name ;
+             kg:hasEvaluationMetric ?metric .
+      ?metric kg:datasetName ?dataset ;
+              kg:metricType ?metricType ;
+              kg:metricValue ?metricValue .
+      FILTER(lcase(str(?dataset)) = "glue")
+      FILTER(regex(lcase(str(?metricType)), "^f1$"))
+    }
+    ORDER BY DESC(xsd:float(?metricValue))
+    LIMIT 1
+  }
+  UNION
+  {
+    SELECT ?model ?name ?dataset ?metricValue ?metricType
+    WHERE {
+      ?model a kg:Model ;
+             kg:task "text-classification" ;
+             kg:name ?name ;
+             kg:hasEvaluationMetric ?metric .
+      ?metric kg:datasetName ?dataset ;
+              kg:metricType ?metricType ;
+              kg:metricValue ?metricValue .
+      FILTER(lcase(str(?dataset)) = "glue")
+      FILTER(regex(lcase(str(?metricType)), "^recall$"))
+    }
+    ORDER BY DESC(xsd:float(?metricValue))
+    LIMIT 1
+  }
+  UNION
+  {
+    SELECT ?model ?name ?dataset ?metricValue ?metricType
+    WHERE {
+      ?model a kg:Model ;
+             kg:task "text-classification" ;
+             kg:name ?name ;
+             kg:hasEvaluationMetric ?metric .
+      ?metric kg:datasetName ?dataset ;
+              kg:metricType ?metricType ;
+              kg:metricValue ?metricValue .
+      FILTER(lcase(str(?dataset)) = "glue")
+      FILTER(regex(lcase(str(?metricType)), "^precision$"))
+    }
+    ORDER BY DESC(xsd:float(?metricValue))
+    LIMIT 1
+  }
+}
+ORDER BY ?metricType DESC(xsd:float(?metricValue))

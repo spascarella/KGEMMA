@@ -1,0 +1,12 @@
+SELECT ?modelName ?paperID ?paperTitle ?paperSummary ?advantages ?limitations
+WHERE {
+  ?model a kg:Model ;
+         kg:name ?modelName ;
+         kg:advantages ?advantages ;
+         kg:limitations ?limitations ;
+         kg:hasPaper ?paper .
+  ?paper bibo:title ?paperTitle ;
+         bibo:abstract ?paperSummary ;
+         bibo:identifier ?paperID
+}
+ORDER BY ?modelName

@@ -1,0 +1,9 @@
+SELECT ?modelName ?hpName ?hpValue
+WHERE {
+  ?model a kg:Model ;
+         kg:name ?modelName ;
+         kg:hasHyperParameter ?hp .
+  ?hp kg:parameterName ?hpName ;
+      kg:parameterValue ?hpValue .
+}
+ORDER BY ?modelName ?hpName

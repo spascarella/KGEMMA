@@ -1,0 +1,4 @@
+SELECT DISTINCT ?instance
+WHERE {
+ ?instance ?property ?value .
+ FILTER NOT EXISTS {?instance rdf:type ?class .}}

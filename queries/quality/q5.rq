@@ -1,0 +1,12 @@
+SELECT ?entity ?property ?value ?expectedRange ?datatypeValue
+WHERE { 
+  ?entity ?property ?value .
+  ?property rdfs:range ?expectedRange .
+  FILTER(isLiteral(?value)) .
+  BIND(DATATYPE(?value) AS ?datatypeValue) .
+  FILTER(
+      ?expectedRange != rdfs:Literal && 
+      ?datatypeValue != ?expectedRange && 
+      ?datatypeValue != rdf:langString
+  )
+}

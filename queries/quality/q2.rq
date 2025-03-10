@@ -1,0 +1,5 @@
+SELECT ?model
+WHERE {
+  ?model a kg:Model .
+  FILTER NOT EXISTS { ?model kg:name ?name }
+}

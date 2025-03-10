@@ -1,0 +1,9 @@
+SELECT ?name
+WHERE {
+  ?model a kg:Model ;
+         kg:task "text-generation" ;
+         kg:language "it" ;
+         kg:name ?name .
+}
+GROUP BY ?model ?name
+LIMIT 5
